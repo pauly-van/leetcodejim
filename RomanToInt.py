@@ -26,28 +26,28 @@ def romanToInt(s):
   #create a table to define each roman number to a value 
   table = {"I": 1, "IV": 4, "IX": 9, "XL": 40, "XC": 90, "CD": 400, "CM": 900, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
   # Break input into list [X, I, V]
-  input = list(s) #[X, I, V]
+  input = list(s) #[X, I, V, X] +1 === nothing
   #loop thru table to find value
   total = 0
+  shouldContinue = False
   keys = list(table.keys()) #an array of keys ['I', 'V', 'X', 'L', 'C', 'D', 'M']
   for r in range(len(input)): 
-    # another loop that goes thru keys
-    print(total)
-    for n in range(len(keys)):
-      try:
-        outOfRange = input[r+1]
-      except:
+    if shouldContinue == True:
+      shouldContinue = False
+      continue
+    for n in range(len(keys)): #keys
+      if r == len(input)-1 and input[r] == keys[n]:
+        total = total + table[input[r]] 
         break
       key = input[r]+input[r+1] 
       if key in table.keys():
         total = total + table[key]
-        r += 2
-        if r>=len(input):
-          break
+        shouldContinue = True
+        break
       elif input[r] == keys[n]:
-    # If is equal to one of the keys
         total = total + table[input[r]] 
         continue
+    # If is equal to one of the keys
   return total
 
 def assertRoman(actual, expected, description):
