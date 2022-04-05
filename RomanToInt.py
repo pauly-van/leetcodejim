@@ -59,3 +59,7 @@ def assertRoman(actual, expected, description):
 assertRoman(romanToInt("CMXLIX"), 949, "Supposed to return int from roman")
 assertRoman(romanToInt("LIX"), 59, "Supposed to return int from roman")
 assertRoman(romanToInt("XLI"), 41, "Supposed to return int from roman")
+
+#overflow of lists should probably be taken care of from beginning
+#look s[i:i+2]  
+#while - full control of the looping variable
