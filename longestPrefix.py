@@ -50,4 +50,9 @@ def longestCommonPrefix(strs):
     return prefix
 
 
+# make a nother function to remove words that doesn't work at all and return new list to use
+
 print(longestCommonPrefix(example1))
+
+
+
