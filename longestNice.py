@@ -5,33 +5,29 @@ Given a string s, return the longest substring of s that is nice. If there are m
 """
 
 def longestNice(string):
-   sameCh = ""
-   counter=0
-   while counter <= len(string):
-     if counter+1 >= len(string):
-        break
-     if string[counter].lower()==string[counter+1].lower():
-        sameCh += string[counter]+string[counter+1]
-        counter+=1
-     elif string[counter].lower() == string[counter-1].lower() and counter!=0:
-         sameCh += string[counter]
-     counter+=1
-   if findNice(sameCh):
-     return sameCh 
-   else:
-      return ""
+    longestnice = ""
+    start = 0 
+    stop = len(string)
+    while start <= stop:
+        if isNice(string[start:stop]):
+            longestnice = string[start:stop]
+        start+=1
+        stop-=1
+    return longestnice
 
-def findNice(string):
-   niceCount = 0
-   for char in range(len(string)):
-      if char+1 >= len(string):
-         break
-      if string[char].islower() and string[char+1].isupper():
-         niceCount+=1
-      elif string[char].isupper() and string[char+1].islower():
-         niceCount+=1
-   return len(string) == niceCount+1
-
+def isNice(string):
+   if string == "":
+       return False
+   for nice in string:
+     lowerNice = nice.lower()
+     upperNice = nice.upper()
+     if nice == lowerNice:
+       if not nice.upper() in string:
+          return False
+     elif nice == upperNice:
+         if not nice.lower() in string:
+            return False
+   return True
 
   
 def assertLongestNice(actual, expected, description):
@@ -43,3 +39,8 @@ def assertLongestNice(actual, expected, description):
 assertLongestNice(longestNice('YazaAay'), 'aAa', 'Should return the longest nice substring')
 assertLongestNice(longestNice('Bb'),'Bb', 'Should return the longest nice substring')
 assertLongestNice(longestNice('c'), '', 'Should return the longest nice substring')
+assertLongestNice(longestNice('abABB'), 'abABB', 'Should return the longest nice substring')
+
+
+
+
