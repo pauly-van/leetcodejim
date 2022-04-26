@@ -2,7 +2,7 @@
 input: string of lowercase and uppercase characters
 output: int 
 contraints: between 1 and 2000 character
-edge cases: upper and lowercase, spaces
+edge cases: upper and lowercase, spaces, all the same characters, 
 """
 
 
@@ -15,6 +15,10 @@ class Solution:
         characters = {}
         # remove spaces in string if there are any
         new_string = s.replace(" ", "")
+        # if all the same characters in string than add length of string to palindrome length 
+        if new_string.count(new_string[0]) == len(new_string):
+            palindrome_length = len(new_string)
+            return palindrome_length
         # iterate through string and add letters to dictionary
         for ch in new_string:
             if ch not in characters:
